@@ -76,3 +76,10 @@ ul li.checked::before {
 	color: white;
 	text-align: center;
 }
+
+/* Clear floats after the header*/
+.header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
