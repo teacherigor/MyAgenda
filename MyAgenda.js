@@ -10,7 +10,7 @@ for (i = 0; i < myNodelist.length; i++) {
 }
 
 // Click on a close button to hide the current list item
-var close = document.getElementByClassName("close");
+var close = document.getElementsByClassName("close");
 var i;
 for (i = 0; i < close.length; i++) {
 	close[i].onclick = function() {
@@ -29,27 +29,29 @@ list.addEventListener('click', function(ev) {
 
 // Create a new list item when clicking on the "Add" button
 function newElement() {
-	var li = document.createElementById("myInput").value;
+	var ul = document.getElementById("myUL");
+
 	var myInputValue = document.getElementById("myInput").value;
-	var t = document.createTextNode(inputValue);
-	li.appendChild(t);
-	if (inputValue === '') {
+    document.getElementById("myInput").value = "";
+
+	if (myInputValue === '') {
 		alert("You must write something!");
-	} else {
-		document.getElementById("myUL").appendChild(li);
+		return
 	}
-	document.getElementById("myInput").value = "";
+
+	var li = document.createElement("LI");
+	var t = document.createTextNode(myInputValue);
+	li.appendChild(t);
 
 	var span = document.createElement("SPAN");
 	var txt = document.createTextNode("\u00D7");
 	span.className = "close";
 	span.appendChild(txt);
-	li.appendChild(span);
-
-	for (i = 0; i < close.length; i++) {
-		close[i].onclick = function() {
-			var div = this.parentElement;
-			div.style.display = "none";
-		}
+	span.onclick = function() {
+		var div = this.parentElement;
+		div.style.display = "none";
 	}
+
+	li.appendChild(span);
+	ul.appendChild(li);
 }
